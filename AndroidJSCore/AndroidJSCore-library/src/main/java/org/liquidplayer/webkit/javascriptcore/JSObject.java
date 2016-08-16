@@ -89,7 +89,7 @@ public class JSObject extends JSValue {
                 Method[] methods = new Method[0];
                 while(!c.getName().equals("JSObject")){
                     // Merge arrays in your way...
-                    merge(methods, c.getDeclaredMethods);
+                    merge(methods, c.getDeclaredMethods());
                     c = c.getSuperclass();
                 }
             }
