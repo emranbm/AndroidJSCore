@@ -6,4 +6,5 @@ libs/
 obj
 project.properties
 build/
+.idea
 *~

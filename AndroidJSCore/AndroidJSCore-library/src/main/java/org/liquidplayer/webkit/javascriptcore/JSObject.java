@@ -84,9 +84,35 @@ public class JSObject extends JSValue {
             @Override
             public void run() {
                 valueRef = make(context.ctxRef(), 0L);
+
+                Class c = getClass();
+                Method[] methods = new Method[0];
+                while(!c.getName().equals("JSObject")){
+                    // Merge arrays in your way...
+                    merge(methods, c.getDeclaredMethods);
+                    c = c.getSuperclass();
+                }
             }
         });
         context.persistObject(this);
+    }
+
+    private Method[] merge(final Method[] a, final Method[] b){
+        ArrayList<Method> result = new ArrayList<Method>();
+        ArrayList<String> names = new ArrayList<String>();
+
+        for (Method m : a){
+            result.add(m);
+            names.add(m.getName());
+        }
+
+        for(Method m : b)
+            if (!names.contains(m.getName())){
+                result.add(m);
+                names.add(m.getName());
+            }
+
+        return result;
     }
 
     /**
