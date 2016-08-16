@@ -106,13 +106,20 @@ public class JSObject extends JSValue {
             names.add(m.getName());
         }
 
-        for(Method m : b)
+        for(Method m : b){
             if (!names.contains(m.getName())){
                 result.add(m);
                 names.add(m.getName());
             }
+        }
 
-        return result;
+        Method[] r = new Method[result.size()];
+
+        for (int i = 0; i < result.size(); i++){
+            r[i] = result.get(i);
+        }
+
+        return r;
     }
 
     /**
