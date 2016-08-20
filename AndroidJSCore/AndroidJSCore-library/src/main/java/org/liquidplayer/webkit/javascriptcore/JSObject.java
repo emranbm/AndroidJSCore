@@ -92,6 +92,11 @@ public class JSObject extends JSValue {
                     merge(methods, c.getDeclaredMethods());
                     c = c.getSuperclass();
                 }
+
+                for (Method m : methods) {
+                    property(m.getName(), new JSFunction(context, m,
+                            JSObject.class, JSObject.this));
+                }
             }
         });
         context.persistObject(this);
